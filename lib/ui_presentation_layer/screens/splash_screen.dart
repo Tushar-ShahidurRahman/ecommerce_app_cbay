@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../utils/app_color.dart';
 import 'home_screen.dart';
@@ -14,9 +15,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 3)).then((value) => Navigator.push(context,  MaterialPageRoute(
-          builder: (context) => HomeScreen(),
-        )));
+    Future.delayed(const Duration(seconds: 3)).then((value) =>
+        // Navigator.push(context,  MaterialPageRoute(
+        //   builder: (context) => HomeScreen(),
+        // )),
+    Get.to(() => const HomeScreen())
+    );
   }
 
   @override

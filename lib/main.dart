@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'ui_presentation_layer/screens/splash_screen.dart';
 
@@ -11,7 +12,7 @@ class CraftyBay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const GetMaterialApp(
       title: 'An ecommerce app',
       home: SplashScreen(),
     );
