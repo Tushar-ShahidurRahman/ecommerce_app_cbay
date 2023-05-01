@@ -1,3 +1,4 @@
+import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/email_verification_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
         // Navigator.push(context,  MaterialPageRoute(
         //   builder: (context) => HomeScreen(),
         // )),
-    Get.to(() => const HomeScreen())
+    Get.to(() => const EmailVerificationScreen())
     );
   }
 
@@ -34,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
             Expanded(
               child: Image.asset('assets/images/logo.png'),
             ),
-            Column(
+          Column(
               children: const [
                 CircularProgressIndicator(
                   color: primaryColor,
