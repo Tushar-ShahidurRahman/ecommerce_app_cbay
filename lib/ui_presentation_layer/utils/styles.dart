@@ -5,7 +5,7 @@ import 'app_color.dart';
 // import 'package:ecommerce_app_cbay/ui_presentation_layer/utils/app_color.dart';
 
 TextStyle screenTitleTextStyle = const TextStyle(
-    color: primaryColor,
+    color: blackColor,
     letterSpacing: .5,
     fontSize: 24,
     fontWeight: FontWeight.w500);

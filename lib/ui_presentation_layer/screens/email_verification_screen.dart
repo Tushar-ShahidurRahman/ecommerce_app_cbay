@@ -1,6 +1,8 @@
 // import 'package:ecommerce_app_cbay/ui_presentation_layer/utils/styles.dart';
+import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/otp_verification_screen.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/utils/app_color.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../custom_widgets/common_elevated_button.dart';
 import '../custom_widgets/common_text_form_field_widget.dart';
@@ -55,7 +57,9 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
             ),
             CommonElevatedButton(
               title: 'Next',
-              onTap: () {},
+              onTap: () {
+                Get.to(OTPVerificationScreen());
+              },
             ),
           ],
         ),
