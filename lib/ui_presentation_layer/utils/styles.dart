@@ -13,5 +13,5 @@ TextStyle screenTitleTextStyle = const TextStyle(
 TextStyle subTitleTextStyle = const TextStyle(
   color: softGreyColor,
   letterSpacing: .5,
-  fontSize: 10,
+  fontSize: 12,
 );

@@ -17,19 +17,26 @@ class CommonTextFormFieldWidget extends StatelessWidget {
   final String hintText;
   final int? maxLines;
   final TextInputType? textInputType;
+  // final TextAlign textAlign;
+  // final TextAlignVertical? textAlignVertical;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+
       controller: controller,
       validator: (String? value) {
         return validator(value);
       },
       maxLines: maxLines,
       keyboardType: textInputType,
+      // textAlign: textAlign,
+      // textAlignVertical: textAlignVertical,
       decoration: InputDecoration(
+
         hintText: hintText,
-        hintStyle: const TextStyle(color: softGreyColor),
+
+        hintStyle: const TextStyle(color: softGreyColor, ),
         contentPadding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
         border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(6))),

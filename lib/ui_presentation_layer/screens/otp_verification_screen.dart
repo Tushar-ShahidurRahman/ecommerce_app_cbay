@@ -1,5 +1,7 @@
+import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/user_profile_screen.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/utils/app_color.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../custom_widgets/common_elevated_button.dart';
@@ -65,7 +67,9 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
             ),
             CommonElevatedButton(
               title: 'Next',
-              onTap: () {},
+              onTap: () {
+                Get.to(const UserProfileScreen());
+              },
             ),
             const SizedBox(height: 16),
             RichText(
@@ -84,7 +88,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
             TextButton(
               // style: TextButton.styleFrom(foregroundColor: softGreyColor),
               onPressed: () {
-                // Get.to()
+
               },
               child: const Text(
                 'Resend otp',
