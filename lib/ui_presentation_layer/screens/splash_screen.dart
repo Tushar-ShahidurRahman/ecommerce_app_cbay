@@ -1,3 +1,4 @@
+import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/bottom_nav_bar_screen.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/email_verification_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
         // Navigator.push(context,  MaterialPageRoute(
         //   builder: (context) => HomeScreen(),
         // )),
-    Get.to(() => const EmailVerificationScreen())
+    Get.to(() => const BottomNavBarScreen())
     );
   }
 
