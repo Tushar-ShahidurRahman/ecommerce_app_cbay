@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
         // Navigator.push(context,  MaterialPageRoute(
         //   builder: (context) => HomeScreen(),
         // )),
-    Get.to(() => const BottomNavBarScreen())
+    Get.off(() => const BottomNavBarScreen())
     );
   }
 

@@ -14,24 +14,30 @@ class CraftyBay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'An ecommerce app',
       home: const SplashScreen(),
       themeMode: ThemeMode.light,
       // Todo: Add theme toggle function between light and dark mode.
       darkTheme: ThemeData(
         brightness: Brightness.dark,
-          elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.purple,
-          textStyle: const TextStyle(
-            fontWeight: FontWeight.w400,
-            letterSpacing: 0.6,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.purple,
+            textStyle: const TextStyle(
+              fontWeight: FontWeight.w400,
+              letterSpacing: 0.6,
+            ),
           ),
         ),
-      ),
         // textTheme: TextTheme
       ),
       theme: ThemeData(
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          shadowColor: Colors.grey,
+        ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: primaryColor,
