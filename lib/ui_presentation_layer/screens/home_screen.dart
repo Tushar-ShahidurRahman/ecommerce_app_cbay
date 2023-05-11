@@ -42,6 +42,7 @@ class HomeScreen extends StatelessWidget {
               HomeCarouselWidget(),
               RemarksTitleWidget(
                 remarksName: 'Categories',
+                // when clicked here, user will be sent to categories screen.
                 onTapSeeAll: () {},
               ),
               SingleChildScrollView(

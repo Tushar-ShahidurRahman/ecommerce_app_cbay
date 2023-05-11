@@ -7,7 +7,7 @@ class CategoriesScreen extends StatelessWidget {
   CategoriesScreen({Key? key}) : super(key: key);
 
   BottomNavigationBarController bottomNavigationBarController =
-      Get.put(BottomNavigationBarController());
+      Get.find<BottomNavigationBarController>();
 
   @override
   Widget build(BuildContext context) {

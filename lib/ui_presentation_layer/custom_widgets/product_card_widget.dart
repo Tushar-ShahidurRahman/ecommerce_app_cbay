@@ -9,6 +9,7 @@ class ProductCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // maybe go to product detail page from here. Lets see...
     return SizedBox(
       width: 130,
       child: Card(
@@ -38,7 +39,9 @@ class ProductCardWidget extends StatelessWidget {
                   const SizedBox(height: 4),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    // crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      // SizedBox(height:.2 ),
                       const Text(
                         '\$366',
                         style: TextStyle(

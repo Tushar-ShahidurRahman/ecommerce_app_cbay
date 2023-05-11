@@ -1,3 +1,4 @@
+import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/bottom_navigation_bar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,6 +15,7 @@ class CraftyBay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      initialBinding: GetXBinding(),
       debugShowCheckedModeBanner: false,
       title: 'An ecommerce app',
       home: const SplashScreen(),
@@ -57,4 +59,12 @@ class CraftyBay extends StatelessWidget {
       ),
     );
   }
+}
+
+class GetXBinding extends Bindings{
+  @override
+  void dependencies() {
+    Get.put(BottomNavigationBarController());
+  }
+
 }

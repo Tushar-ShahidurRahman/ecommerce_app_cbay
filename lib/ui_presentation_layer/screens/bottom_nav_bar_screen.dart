@@ -16,7 +16,7 @@ class BottomNavBarScreen extends StatefulWidget {
 
 class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
 
-  BottomNavigationBarController bottomNavBarController = Get.put(BottomNavigationBarController());
+  BottomNavigationBarController bottomNavBarController = Get.find<BottomNavigationBarController>();
 
   final List<Widget> _screens = [
     HomeScreen(),
