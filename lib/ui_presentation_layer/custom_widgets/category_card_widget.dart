@@ -19,6 +19,8 @@ class CategoryCardWidget extends StatelessWidget {
       child: InkWell(
         onTap: () {
           Get.to(ProductListScreen());
+          // Get.find<BottomNavigationBarController>(ProductListScreen());
+
         },
         child: Column(
           children: [

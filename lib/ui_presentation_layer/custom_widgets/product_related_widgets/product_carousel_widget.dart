@@ -3,16 +3,18 @@ import 'package:flutter/material.dart';
 
 import '../../utils/app_color.dart';
 
-class HomeCarouselWidget extends StatelessWidget {
+class ProductCarouselWidget extends StatelessWidget {
   final ValueNotifier<int> _currentCarouselIndex = ValueNotifier(0);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
+      // This will align the items at bottom center.
+      alignment: Alignment.bottomCenter,
       children: [
         CarouselSlider(
           options: CarouselOptions(
-            height: 180.0,
+            height: 200.0,
             viewportFraction: 1,
             autoPlay: true,
             animateToClosest: true,
@@ -20,15 +22,15 @@ class HomeCarouselWidget extends StatelessWidget {
               return _currentCarouselIndex.value = index;
             },
           ),
-          items: [1, 2, 3, 4, 5].map((i) {
+          items: [1, 2, 3, 4].map((i) {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
                     width: MediaQuery.of(context).size.width,
-                    margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                    // margin: const EdgeInsets.symmetric(horizontal: 5.0),
                     decoration: BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.grey.withOpacity(0.3),
+                      // borderRadius: BorderRadius.circular(8),
                     ),
                     alignment: Alignment.center,
                     child: Text(
@@ -39,13 +41,20 @@ class HomeCarouselWidget extends StatelessWidget {
             );
           }).toList(),
         ),
-        ValueListenableBuilder(
+        // Another way of getting the position of the item at that point.
+        // Positioned.fill(
+        //   child: Align(
+        //     alignment: Alignment.bottomCenter,
+        //     child:
+        Padding(
+          padding: const EdgeInsets.only(bottom: 4.0),
+          child: ValueListenableBuilder(
             valueListenable: _currentCarouselIndex,
             builder: (context, currentIndex, _) {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  for (int i = 0; i < 5; i++)
+                  for (int i = 0; i < 4; i++)
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 2.0, vertical: 6),
@@ -54,15 +63,19 @@ class HomeCarouselWidget extends StatelessWidget {
                         width: 10,
                         decoration: BoxDecoration(
                           // This currentIndex came via valueListenableBuilder from our _currentCarouselIndex variable
-                          color: currentIndex == i ? primaryColor : null,
-                          border: Border.all(color: greyColor.withOpacity(.5)),
+                          color: currentIndex == i ? primaryColor : Colors.white,
+                          // border: Border.all(color: greyColor.withOpacity(.5)),
                           borderRadius: BorderRadius.circular(16),
                         ),
                       ),
                     ),
                 ],
               );
-            }),
+            },
+          ),
+          //     ),
+          //   ),
+        ),
       ],
     );
   }

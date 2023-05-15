@@ -1,6 +1,8 @@
 import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/cart_screen.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/categories_screen.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/home_screen.dart';
+import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/product_details_screen.dart';
+import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/review_screen.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/wish_list_screen.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/bottom_navigation_bar_controller.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/utils/app_color.dart';
@@ -23,6 +25,9 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
     CategoriesScreen(),
     CartScreen(),
     WishListScreen(),
+    // It doesn't match with the item list length. That's why shows a problem
+    // ProductDetailsScreen(),
+    // ReviewScreen(),
   ];
   // int _selectedIndex = 0;
 

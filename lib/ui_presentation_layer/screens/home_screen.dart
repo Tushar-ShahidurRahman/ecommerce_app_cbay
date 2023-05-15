@@ -1,4 +1,7 @@
+import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/categories_screen.dart';
+import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/bottom_navigation_bar_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../custom_widgets/home/appbar_circular_icon_button_widget.dart';
 import '../custom_widgets/home/home_carousel_widget.dart';
@@ -43,7 +46,9 @@ class HomeScreen extends StatelessWidget {
               RemarksTitleWidget(
                 remarksName: 'Categories',
                 // when clicked here, user will be sent to categories screen.
-                onTapSeeAll: () {},
+                onTapSeeAll: () {
+                  Get.find<BottomNavigationBarController>().changePageWhenTapped(1);
+                },
               ),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
