@@ -19,7 +19,7 @@ class _ProductStepperWidgetState extends State<ProductStepperWidget> {
       children: [
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-              minimumSize: Size(12, 24), padding: EdgeInsets.all(0)),
+              minimumSize: const Size(12, 24), padding: const EdgeInsets.all(0)),
           onPressed: () {
             if (_currentValue > 1) {
               _currentValue--;
@@ -30,7 +30,7 @@ class _ProductStepperWidgetState extends State<ProductStepperWidget> {
         ),
         SizedBox(
           // alignment: Alignment.center,
-          width: 44,
+          width: 43,
           //If i define height, i can't see the text inside the text field.
           // height: 45,
           child: TextField(
@@ -47,7 +47,7 @@ class _ProductStepperWidgetState extends State<ProductStepperWidget> {
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-              minimumSize: Size(12, 24), padding: EdgeInsets.all(0)),
+              minimumSize: const Size(12, 24), padding: const EdgeInsets.all(0)),
           onPressed: () {
             if (_currentValue < 20) {
               _currentValue++;
