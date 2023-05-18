@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../custom_widgets/common_elevated_button.dart';
-import '../custom_widgets/common_text_form_field_widget.dart';
 import '../utils/styles.dart';
 
 class OTPVerificationScreen extends StatefulWidget {
@@ -20,7 +19,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(24.0),
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -63,15 +62,15 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
               appContext: context,
             ),
             const SizedBox(
-              height: 8,
+              height: 4,
             ),
             CommonElevatedButton(
               title: 'Next',
               onTap: () {
-                Get.to(const UserProfileScreen());
+                Get.to(() => const UserProfileScreen());
               },
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
             RichText(
               text: const TextSpan(
                   text: 'This code will expire within ',
@@ -87,9 +86,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
             ),
             TextButton(
               // style: TextButton.styleFrom(foregroundColor: softGreyColor),
-              onPressed: () {
-
-              },
+              onPressed: () {},
               child: const Text(
                 'Resend otp',
                 style: TextStyle(

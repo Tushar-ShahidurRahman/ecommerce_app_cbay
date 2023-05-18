@@ -12,7 +12,8 @@ class NetworkCaller {
 
   static Future<ResponseModel> getRequest({required String url}) async {
     try {
-      final Response response = await get(Uri.parse(Urls.baseUrl + url));
+      final Response response = await get(Uri.parse(url));
+      log(response.body);
       if (response.statusCode == 200) {
         return ResponseModel(
           statusCode: response.statusCode,

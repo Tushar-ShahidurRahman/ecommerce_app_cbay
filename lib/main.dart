@@ -1,4 +1,5 @@
 import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/bottom_navigation_bar_controller.dart';
+import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/user_auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -45,7 +46,6 @@ class CraftyBay extends StatelessWidget {
             fontSize: 18,
           ),
           iconTheme: IconThemeData(color: Colors.black, size: 18),
-
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
@@ -61,10 +61,10 @@ class CraftyBay extends StatelessWidget {
   }
 }
 
-class GetXBinding extends Bindings{
+class GetXBinding extends Bindings {
   @override
   void dependencies() {
     Get.put(BottomNavigationBarController());
+    Get.put(UserAuthController());
   }
-
 }
