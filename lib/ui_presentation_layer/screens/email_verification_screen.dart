@@ -59,6 +59,31 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                 const SizedBox(
                   height: 8,
                 ),
+                // Visibility(
+                //   visible: authController.emailVerificationInProgress,
+                //   child: CircularProgressIndicator(),
+                //   replacement: CommonElevatedButton(
+                //     title: 'Next',
+                //     onTap: () async {
+                //       if (_formKey.currentState!.validate()) {
+                //         final bool response = await authController
+                //             .emailVerification(_emailETController.text);
+                //         if (response) {
+                //           Get.to(() => const OTPVerificationScreen());
+                //         } else {
+                //           if (mounted) {
+                //             ScaffoldMessenger.of(context).showSnackBar(
+                //               const SnackBar(
+                //                 content: Text(
+                //                     'Email is not verified, please try again.'),
+                //               ),
+                //             );
+                //           }
+                //         }
+                //       }
+                //     },
+                //   ),
+                // ),
                 authController.emailVerificationInProgress
                     ? const CircularProgressIndicator()
                     : CommonElevatedButton(
@@ -68,7 +93,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                             final bool response = await authController
                                 .emailVerification(_emailETController.text);
                             if (response) {
-                              Get.to(() => const OTPVerificationScreen());
+                              Get.to(() => OTPVerificationScreen(email: _emailETController.text,));
                             } else {
                               if (mounted) {
                                 ScaffoldMessenger.of(context).showSnackBar(

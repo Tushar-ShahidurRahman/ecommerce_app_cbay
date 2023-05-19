@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'ui_presentation_layer/screens/splash_screen.dart';
+import 'ui_presentation_layer/ui_state_manager/auth_controller.dart';
 import 'ui_presentation_layer/utils/app_color.dart';
 
 void main() {
@@ -66,5 +67,6 @@ class GetXBinding extends Bindings {
   void dependencies() {
     Get.put(BottomNavigationBarController());
     Get.put(UserAuthController());
+    Get.put(AuthController());
   }
 }

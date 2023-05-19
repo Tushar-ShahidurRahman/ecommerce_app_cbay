@@ -1,5 +1,6 @@
 import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/bottom_nav_bar_screen.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/email_verification_screen.dart';
+import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,12 +18,18 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 3)).then((value) =>
-        // Navigator.push(context,  MaterialPageRoute(
-        //   builder: (context) => HomeScreen(),
-        // )),
-    Get.off(() => const BottomNavBarScreen())
-    );
+    Future.delayed(const Duration(seconds: 1)).then((value) async {
+      bool logInState = await Get.find<AuthController>().isLoggedIn();
+      if (logInState) {
+        Get.off(() => BottomNavBarScreen());
+      } else {
+        Get.off(() => EmailVerificationScreen());
+      }
+      // Navigator.push(context,  MaterialPageRoute(
+      //   builder: (context) => HomeScreen(),
+      // )),
+      // Get.off(() => const BottomNavBarScreen())
+    });
   }
 
   @override
@@ -36,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
             Expanded(
               child: Image.asset('assets/images/logo.png'),
             ),
-          Column(
+            Column(
               children: const [
                 CircularProgressIndicator(
                   color: primaryColor,
@@ -46,8 +53,8 @@ class _SplashScreenState extends State<SplashScreen> {
                   padding: EdgeInsets.all(18.0),
                   child: Text(
                     'Version 1.0',
-                    style: TextStyle(color: greyColor, fontSize: 17,
-                    letterSpacing: 0.5),
+                    style: TextStyle(
+                        color: greyColor, fontSize: 17, letterSpacing: 0.5),
                   ),
                 ),
               ],
