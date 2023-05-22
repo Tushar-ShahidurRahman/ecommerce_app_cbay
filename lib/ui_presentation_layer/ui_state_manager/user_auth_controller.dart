@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:ecommerce_app_cbay/data/services/network_caller.dart';
 import 'package:ecommerce_app_cbay/data/utils/urls.dart';
+import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/user_profile_controller.dart';
 import 'package:get/get.dart';
 
 import 'auth_controller.dart';
@@ -17,10 +18,10 @@ class UserAuthController extends GetxController {
   Future<bool> emailVerification(String email) async {
     _emailVerificationInProgress = true;
   update();
-    final response =
+    final emailResponseCt =
         await NetworkCaller.getRequest(url: Urls.userLoginUrl(email));
     _emailVerificationInProgress = false;
-    if (response.isSuccess) {
+    if (emailResponseCt.isSuccess) {
       update();
       return true;
     } else {
@@ -31,12 +32,13 @@ class UserAuthController extends GetxController {
   Future<bool> otpVerification(String email, String otp) async {
     _otpVerificationInProgress = true;
     update();
-    final response =
+    final otpResponseInCntlr =
         await NetworkCaller.getRequest(url: Urls.verifyOTPUrl(email, otp));
     _otpVerificationInProgress = false;
-    if (response.isSuccess) {
-      log(response.bodyData['data']);
-      await Get.find<AuthController>().saveToken(response.bodyData['data']);
+    if (otpResponseInCntlr.isSuccess) {
+      log(otpResponseInCntlr.bodyData['data']);
+      await Get.find<AuthController>().saveToken(otpResponseInCntlr.bodyData['data']);
+      Get.find<UserProfileController>().getProfileData();
       update();
       return true;
     } else {

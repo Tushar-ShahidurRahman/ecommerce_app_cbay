@@ -90,9 +90,9 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                         title: 'Next',
                         onTap: () async {
                           if (_formKey.currentState!.validate()) {
-                            final bool response = await authController
+                            final bool emailResponseUI = await authController
                                 .emailVerification(_emailETController.text);
-                            if (response) {
+                            if (emailResponseUI) {
                               Get.to(() => OTPVerificationScreen(email: _emailETController.text,));
                             } else {
                               if (mounted) {

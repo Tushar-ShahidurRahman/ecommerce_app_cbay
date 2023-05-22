@@ -1,5 +1,6 @@
 import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/bottom_navigation_bar_controller.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/user_auth_controller.dart';
+import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/user_profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -68,5 +69,6 @@ class GetXBinding extends Bindings {
     Get.put(BottomNavigationBarController());
     Get.put(UserAuthController());
     Get.put(AuthController());
+    Get.put(UserProfileController());
   }
 }

@@ -104,9 +104,9 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                   : CommonElevatedButton(
                       title: 'Next',
                       onTap: () async {
-                        final response = await authController.otpVerification(
+                        final otpResponseUI = await authController.otpVerification(
                             widget.email, _otpETController.text);
-                        if (response) {
+                        if (otpResponseUI) {
                           Get.to(() => const UserProfileScreen());
                         } else {
                           Get.showSnackbar(

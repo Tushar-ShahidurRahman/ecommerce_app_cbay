@@ -1,5 +1,6 @@
 import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/categories_screen.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/email_verification_screen.dart';
+import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/auth_controller.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/bottom_navigation_bar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,7 +28,14 @@ class HomeScreen extends StatelessWidget {
             AppBarCircularIconButtonWidget(
               iconData: Icons.person_outline,
               onTap: () {
-                Get.to(const EmailVerificationScreen());
+                Get.find<AuthController>().isLoggedIn().then((value) {
+                  if (value) {
+                    // Todo: Need to create a ProfileScreen for user datails.
+                    // Get.to(()=> ProfileScreen());
+                  } else {
+                    Get.to(const EmailVerificationScreen());
+                  }
+                });
               },
             ),
             AppBarCircularIconButtonWidget(
