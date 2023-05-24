@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/home_screen.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/user_profile_screen.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/auth_controller.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/utils/app_color.dart';
@@ -52,7 +53,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GetBuilder<UserAuthController>(builder: (authController) {
+      body: GetBuilder<UserAuthController>(builder: (userAuthController) {
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
           child: Column(
@@ -99,15 +100,15 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
               const SizedBox(
                 height: 4,
               ),
-              authController.otpVerificationInProgress
+              userAuthController.otpVerificationInProgress
                   ? const CircularProgressIndicator()
                   : CommonElevatedButton(
                       title: 'Next',
                       onTap: () async {
-                        final otpResponseUI = await authController.otpVerification(
+                        final otpResponseUI = await userAuthController.otpVerification(
                             widget.email, _otpETController.text);
                         if (otpResponseUI) {
-                          Get.to(() => const UserProfileScreen());
+                          Get.offAll(() => const HomeScreen());
                         } else {
                           Get.showSnackbar(
 

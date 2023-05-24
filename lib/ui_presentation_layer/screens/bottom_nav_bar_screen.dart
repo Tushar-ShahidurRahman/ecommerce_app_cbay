@@ -5,6 +5,7 @@ import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/product_details
 import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/review_screen.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/wish_list_screen.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/bottom_navigation_bar_controller.dart';
+import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/home_controller.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/utils/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,6 +18,13 @@ class BottomNavBarScreen extends StatefulWidget {
 }
 
 class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
+
+  @override
+  void initState() {
+    //ToDo:get.find home controller
+    Get.find<HomeController>().getHomeSlider();
+    super.initState();
+  }
 
   BottomNavigationBarController bottomNavBarController = Get.find<BottomNavigationBarController>();
 
