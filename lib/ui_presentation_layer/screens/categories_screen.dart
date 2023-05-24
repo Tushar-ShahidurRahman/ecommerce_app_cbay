@@ -1,10 +1,19 @@
 import 'package:ecommerce_app_cbay/ui_presentation_layer/custom_widgets/category_card_widget.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/bottom_navigation_bar_controller.dart';
+import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/category_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../data/model/category_model.dart';
+
 class CategoriesScreen extends StatelessWidget {
-  CategoriesScreen({Key? key}) : super(key: key);
+  CategoriesScreen({
+    Key? key,
+    // required this.categoryModel,
+  }) : super(key: key);
+
+  // CategoryModel categoryModel;
+  // Get.find<CategoryController>().categoryModel;
 
   BottomNavigationBarController bottomNavigationBarController =
       Get.find<BottomNavigationBarController>();
@@ -25,13 +34,29 @@ class CategoriesScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4),
-            itemCount: 30,
-            itemBuilder: (context, index) {
-              return const CategoryCardWidget(name: 'Food');
-            }),
+        child: GetBuilder<CategoryController>(builder: (categoryController) {
+          if (categoryController.categoryDataInProgress) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          return RefreshIndicator(
+            onRefresh: () async {
+              Get.find<CategoryController>().getCategoryData();
+            },
+            child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 4),
+                itemCount: categoryController.categoryModel.category?.length ?? 0,
+                itemBuilder: (context, index) {
+                  final category =
+                      categoryController.categoryModel.category![index];
+                  return CategoryCardWidget(
+                    name: category.categoryName.toString(),
+                    imgUrl: category.categoryImg.toString(),
+                    // (categoryModel.category?.categoryName ?? ''),
+                  );
+                }),
+          );
+        }),
       ),
     );
   }

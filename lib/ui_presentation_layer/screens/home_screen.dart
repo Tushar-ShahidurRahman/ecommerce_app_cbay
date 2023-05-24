@@ -3,6 +3,7 @@ import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/categories_scre
 import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/email_verification_screen.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/auth_controller.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/bottom_navigation_bar_controller.dart';
+import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/category_controller.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -34,7 +35,7 @@ class HomeScreen extends StatelessWidget {
                 Get.find<AuthController>().isLoggedIn().then((value) {
                   if (value) {
                     // Todo: Need to create a ProfileScreen for user datails.
-                    Get.to(() => UserProfileScreen());
+                    Get.to(() => const UserProfileScreen());
                   } else {
                     Get.to(const EmailVerificationScreen());
                   }
@@ -52,6 +53,7 @@ class HomeScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // TextField(),
               const SearchTextField(),
@@ -75,29 +77,27 @@ class HomeScreen extends StatelessWidget {
                       .changePageWhenTapped(1);
                 },
               ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
-                    CategoryCardWidget(
-                      name: 'Computer',
+              GetBuilder<CategoryController>(builder: (categoryController) {
+                if (categoryController.categoryDataInProgress) {
+                  return const SizedBox(
+                    height: 90,
+                    child: Center(child: CircularProgressIndicator()),
+                  );
+                } else {
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: categoryController.categoryModel.category!
+                          .map((category) {
+                        return CategoryCardWidget(
+                          name: category.categoryName.toString(),
+                          imgUrl: category.categoryImg.toString(),
+                        );
+                      }).toList(),
                     ),
-                    CategoryCardWidget(
-                      name: 'Food',
-                    ),
-                    CategoryCardWidget(
-                      name: 'Fashion',
-                    ),
-                    CategoryCardWidget(
-                      name: 'Furniture',
-                    ),
-                    CategoryCardWidget(
-                      name: 'Electronics',
-                    ),
-                  ],
-                ),
-              ),
+                  );
+                }
+              }),
               const SizedBox(height: 16),
               RemarksTitleWidget(
                 remarksName: 'Popular',
