@@ -5,6 +5,7 @@ import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/wish_list_scree
 import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/bottom_navigation_bar_controller.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/category_controller.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/home_controller.dart';
+import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/product_by_remark_controller.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/utils/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,10 +21,10 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
 
   @override
   void initState() {
-    //ToDo:get.find home controller
+    super.initState();
     Get.find<HomeController>().getHomeSlider();
     Get.find<CategoryController>().getCategoryData();
-    super.initState();
+    Get.find<ProductByRemarkController>().getPopularProduct();
   }
 
   BottomNavigationBarController bottomNavBarController = Get.find<BottomNavigationBarController>();

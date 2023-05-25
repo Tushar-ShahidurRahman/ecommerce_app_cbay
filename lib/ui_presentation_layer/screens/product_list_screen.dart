@@ -13,16 +13,16 @@ class ProductListScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            childAspectRatio: .73,
-          ),
-          itemCount: 30,
-          itemBuilder: (context, index) {
-            return const ProductCardWidget();
-          },
-        ),
+        // child: GridView.builder(
+        //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        //     crossAxisCount: 3,
+        //     childAspectRatio: .73,
+        //   ),
+        //   itemCount: 30,
+        //   itemBuilder: (context, index) {
+        //     return const ProductCardWidget();
+        //   },
+        // ),
       ),
     );
   }

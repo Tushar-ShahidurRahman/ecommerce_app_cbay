@@ -5,6 +5,7 @@ import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/auth_c
 import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/bottom_navigation_bar_controller.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/category_controller.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/home_controller.dart';
+import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/product_by_remark_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -104,17 +105,23 @@ class HomeScreen extends StatelessWidget {
                 onTapSeeAll: () {},
               ),
 
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: const [
-                    ProductCardWidget(),
-                    ProductCardWidget(),
-                    ProductCardWidget(),
-                    ProductCardWidget(),
-                  ],
-                ),
-              ),
+              GetBuilder<ProductByRemarkController>(
+                  builder: (productByRemarkController) {
+                return Visibility(
+                  visible: productByRemarkController
+                      .getPopularProductByRemarkInProgress,
+                  child: const Center(child: CircularProgressIndicator()),
+                  replacement: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                        children: productByRemarkController
+                            .popularProduct.products!
+                            .map((e) {
+                      return ProductCardWidget(product: e);
+                    }).toList()),
+                  ),
+                );
+              }),
               const SizedBox(height: 16),
               RemarksTitleWidget(
                 remarksName: 'Special',
@@ -125,10 +132,10 @@ class HomeScreen extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: const [
-                    ProductCardWidget(),
-                    ProductCardWidget(),
-                    ProductCardWidget(),
-                    ProductCardWidget(),
+                    // ProductCardWidget(),
+                    // ProductCardWidget(),
+                    // ProductCardWidget(),
+                    // ProductCardWidget(),
                   ],
                 ),
               ),
@@ -142,10 +149,10 @@ class HomeScreen extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: const [
-                    ProductCardWidget(),
-                    ProductCardWidget(),
-                    ProductCardWidget(),
-                    ProductCardWidget(),
+                    // ProductCardWidget(),
+                    // ProductCardWidget(),
+                    // ProductCardWidget(),
+                    // ProductCardWidget(),
                   ],
                 ),
               ),

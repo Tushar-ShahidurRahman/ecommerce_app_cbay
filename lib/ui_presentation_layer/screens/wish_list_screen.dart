@@ -20,16 +20,16 @@ class WishListScreen extends StatelessWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              childAspectRatio: .70,
-            ),
-            itemCount: 10,
-            itemBuilder: (context, index) {
-              return const ProductCardWidget();
-            },
-          ),
+          // child: GridView.builder(
+          //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          //     crossAxisCount: 3,
+          //     childAspectRatio: .70,
+          //   ),
+          //   itemCount: 10,
+          //   itemBuilder: (context, index) {
+          //     return const ProductCardWidget();
+          //   },
+          // ),
         ));
   }
 }
