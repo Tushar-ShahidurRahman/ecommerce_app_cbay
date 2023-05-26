@@ -1,5 +1,3 @@
-import 'package:ecommerce_app_cbay/data/model/slider_model.dart';
-import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/categories_screen.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/email_verification_screen.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/auth_controller.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/bottom_navigation_bar_controller.dart';
@@ -109,17 +107,23 @@ class HomeScreen extends StatelessWidget {
                   builder: (productByRemarkController) {
                 return Visibility(
                   visible: productByRemarkController
-                      .getPopularProductByRemarkInProgress,
+                          .getPopularProductByRemarkInProgress ||
+                      productByRemarkController.popularProduct == null,
                   child: const Center(child: CircularProgressIndicator()),
-                  replacement: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                        children: productByRemarkController
-                            .popularProduct.products!
-                            .map((e) {
-                      return ProductCardWidget(product: e);
-                    }).toList()),
-                  ),
+                  replacement:
+    GetBuilder<ProductByRemarkController>(
+                      builder: (productByRemarkController) {
+                    return
+                  SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                          children: productByRemarkController
+                              .popularProduct.products!
+                              .map((product) {
+                        return ProductCardWidget(product: product);
+                      }).toList()),
+                  );
+                  }),
                 );
               }),
               const SizedBox(height: 16),
@@ -128,33 +132,57 @@ class HomeScreen extends StatelessWidget {
                 onTapSeeAll: () {},
               ),
 
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: const [
-                    // ProductCardWidget(),
-                    // ProductCardWidget(),
-                    // ProductCardWidget(),
-                    // ProductCardWidget(),
-                  ],
-                ),
-              ),
+              GetBuilder<ProductByRemarkController>(
+                  builder: (productByRemarkController) {
+                return Visibility(
+                  visible: productByRemarkController
+                          .getSpecialProductByRemarkInProgress ||
+                      productByRemarkController.specialProduct == null,
+                  replacement: GetBuilder<ProductByRemarkController>(
+                      builder: (productByRemarkController){
+                      return SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: productByRemarkController
+                              .specialProduct.products!
+                              .map((specialProduct) {
+                            return ProductCardWidget(product: specialProduct);
+                          }).toList(),
+                        ),
+                      );
+                    }
+                  ),
+                  child: const Center(child: CircularProgressIndicator()),
+                );
+              }),
               const SizedBox(height: 16),
               RemarksTitleWidget(
                 remarksName: 'New',
                 onTapSeeAll: () {},
               ),
 
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: const [
-                    // ProductCardWidget(),
-                    // ProductCardWidget(),
-                    // ProductCardWidget(),
-                    // ProductCardWidget(),
-                  ],
-                ),
+              GetBuilder<ProductByRemarkController>(
+                builder: (productByRemarkController) {
+                  return Visibility(
+                    visible: productByRemarkController
+                            .getNewProductByRemarkInProgress &&
+                        productByRemarkController.newProduct == null,
+                    child: const Center(child: CircularProgressIndicator()),
+                    replacement: GetBuilder<ProductByRemarkController>(
+                        builder: (productByRemarkController) {
+                        return SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: productByRemarkController.newProduct.products!
+                                .map((newProduct) {
+                              return ProductCardWidget(product: newProduct);
+                            }).toList(),
+                          ),
+                        );
+                      }
+                    ),
+                  );
+                },
               ),
             ],
           ),

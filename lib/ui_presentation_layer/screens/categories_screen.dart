@@ -1,20 +1,31 @@
 import 'package:ecommerce_app_cbay/ui_presentation_layer/custom_widgets/category_card_widget.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/bottom_navigation_bar_controller.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/category_controller.dart';
+import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/product_by_remark_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../data/model/category_model.dart';
 
-class CategoriesScreen extends StatelessWidget {
-  CategoriesScreen({
+class CategoriesScreen extends StatefulWidget {
+  const CategoriesScreen({
     Key? key,
     // required this.categoryModel,
   }) : super(key: key);
 
-  // CategoryModel categoryModel;
-  // Get.find<CategoryController>().categoryModel;
+  @override
+  State<CategoriesScreen> createState() => _CategoriesScreenState();
+}
 
+class _CategoriesScreenState extends State<CategoriesScreen> {
+
+  @override
+  // void initState() {
+  //   super.initState();
+  //   Get.find<ProductByRemarkController>().
+  // }
+
+  // CategoryModel categoryModel;
   BottomNavigationBarController bottomNavigationBarController =
       Get.find<BottomNavigationBarController>();
 
