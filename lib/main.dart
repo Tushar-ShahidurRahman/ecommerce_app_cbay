@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 
 import 'ui_presentation_layer/screens/splash_screen.dart';
 import 'ui_presentation_layer/ui_state_manager/auth_controller.dart';
+import 'ui_presentation_layer/ui_state_manager/product_controller.dart';
 import 'ui_presentation_layer/utils/app_color.dart';
 
 void main() {
@@ -76,5 +77,6 @@ class GetXBinding extends Bindings {
     Get.put(HomeController());
     Get.put(CategoryController());
     Get.put(ProductByRemarkController());
+    Get.put(ProductController());
   }
 }

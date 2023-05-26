@@ -7,10 +7,11 @@ import '../utils/app_color.dart';
 class CategoryCardWidget extends StatelessWidget {
   const CategoryCardWidget({
     super.key,
-    required this.name, required this.imgUrl,
+    required this.name, required this.imgUrl, required this.categoryId,
   });
 
   final String name, imgUrl;
+  final int categoryId;
 
 
   @override
@@ -19,7 +20,7 @@ class CategoryCardWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 4.0),
       child: InkWell(
         onTap: () {
-          Get.to(ProductListScreen());
+          Get.to(ProductListScreen(categoryId: categoryId,));
           // Get.find<BottomNavigationBarController>(ProductListScreen());
 
         },

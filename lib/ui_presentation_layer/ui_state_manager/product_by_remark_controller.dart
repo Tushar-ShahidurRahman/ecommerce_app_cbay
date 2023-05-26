@@ -1,4 +1,4 @@
-import 'package:ecommerce_app_cbay/data/model/product_by_remark_model.dart';
+import 'package:ecommerce_app_cbay/data/model/product_by_category_model.dart';
 import 'package:ecommerce_app_cbay/data/services/network_caller.dart';
 import 'package:get/get.dart';
 
@@ -16,13 +16,13 @@ class ProductByRemarkController extends GetxController {
   bool get getSpecialProductByRemarkInProgress =>
       _getSpecialProductByRemarkInProgress;
 
-  ProductByRemarkModel _popularProduct = ProductByRemarkModel();
-  ProductByRemarkModel _newProduct = ProductByRemarkModel();
-  ProductByRemarkModel _specialProduct = ProductByRemarkModel();
+  ProductByCategoryModel _popularProduct = ProductByCategoryModel();
+  ProductByCategoryModel _newProduct = ProductByCategoryModel();
+  ProductByCategoryModel _specialProduct = ProductByCategoryModel();
 
-  ProductByRemarkModel get popularProduct => _popularProduct;
-  ProductByRemarkModel get newProduct => _newProduct;
-  ProductByRemarkModel get specialProduct => _specialProduct;
+  ProductByCategoryModel get popularProduct => _popularProduct;
+  ProductByCategoryModel get newProduct => _newProduct;
+  ProductByCategoryModel get specialProduct => _specialProduct;
 
   // Get popular product from the api and saves it in popular product model.
   Future<bool> getPopularProduct() async {
@@ -34,7 +34,7 @@ class ProductByRemarkController extends GetxController {
 
     if (popularProductResponseInCtlr.isSuccess) {
       _popularProduct =
-          ProductByRemarkModel.fromJson(popularProductResponseInCtlr.bodyData);
+          ProductByCategoryModel.fromJson(popularProductResponseInCtlr.bodyData);
       update();
       return true;
     } else {
@@ -52,7 +52,7 @@ class ProductByRemarkController extends GetxController {
 
     if (newProductResponseInCtlr.isSuccess) {
       _newProduct =
-          ProductByRemarkModel.fromJson(newProductResponseInCtlr.bodyData);
+          ProductByCategoryModel.fromJson(newProductResponseInCtlr.bodyData);
       update();
       return true;
     } else {
@@ -71,7 +71,7 @@ class ProductByRemarkController extends GetxController {
 
     if (specialProductResponseInCtlr.isSuccess) {
       _specialProduct =
-          ProductByRemarkModel.fromJson(specialProductResponseInCtlr.bodyData);
+          ProductByCategoryModel.fromJson(specialProductResponseInCtlr.bodyData);
       update();
       return true;
     } else {

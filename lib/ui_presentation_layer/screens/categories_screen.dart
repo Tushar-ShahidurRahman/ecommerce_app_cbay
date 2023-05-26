@@ -6,26 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../data/model/category_model.dart';
+import '../ui_state_manager/product_controller.dart';
 
-class CategoriesScreen extends StatefulWidget {
-  const CategoriesScreen({
+class CategoriesScreen extends StatelessWidget {
+   CategoriesScreen({
     Key? key,
     // required this.categoryModel,
   }) : super(key: key);
 
-  @override
-  State<CategoriesScreen> createState() => _CategoriesScreenState();
-}
-
-class _CategoriesScreenState extends State<CategoriesScreen> {
-
-  @override
-  // void initState() {
-  //   super.initState();
-  //   Get.find<ProductByRemarkController>().
-  // }
-
-  // CategoryModel categoryModel;
+  // @override
   BottomNavigationBarController bottomNavigationBarController =
       Get.find<BottomNavigationBarController>();
 
@@ -63,6 +52,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   return CategoryCardWidget(
                     name: category.categoryName.toString(),
                     imgUrl: category.categoryImg.toString(),
+                    categoryId: category.id ?? 0,
                     // (categoryModel.category?.categoryName ?? ''),
                   );
                 }),
