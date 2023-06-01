@@ -6,6 +6,10 @@ import '../../utils/app_color.dart';
 class ProductCarouselWidget extends StatelessWidget {
   final ValueNotifier<int> _currentCarouselIndex = ValueNotifier(0);
 
+  final List<String> images;
+
+  ProductCarouselWidget({super.key, required this.images});
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -22,21 +26,21 @@ class ProductCarouselWidget extends StatelessWidget {
               return _currentCarouselIndex.value = index;
             },
           ),
-          items: [1, 2, 3, 4].map((i) {
+          items: images.map((image) {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
-                    width: MediaQuery.of(context).size.width,
-                    // margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                    decoration: BoxDecoration(
-                      color: Colors.grey.withOpacity(0.3),
-                      // borderRadius: BorderRadius.circular(8),
+                  width: MediaQuery.of(context).size.width,
+                  // margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.3),
+                    // borderRadius: BorderRadius.circular(8),
+                    image: DecorationImage(
+                      image: NetworkImage(image),
                     ),
-                    alignment: Alignment.center,
-                    child: Text(
-                      'text $i',
-                      style: const TextStyle(fontSize: 16.0),
-                    ));
+                  ),
+                  alignment: Alignment.center,
+                );
               },
             );
           }).toList(),
@@ -63,7 +67,8 @@ class ProductCarouselWidget extends StatelessWidget {
                         width: 10,
                         decoration: BoxDecoration(
                           // This currentIndex came via valueListenableBuilder from our _currentCarouselIndex variable
-                          color: currentIndex == i ? primaryColor : Colors.white,
+                          color:
+                              currentIndex == i ? primaryColor : Colors.white,
                           // border: Border.all(color: greyColor.withOpacity(.5)),
                           borderRadius: BorderRadius.circular(16),
                         ),

@@ -2,7 +2,7 @@ import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/product_details
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../data/model/productData.dart';
+import '../../data/model/product_data.dart';
 import '../ui_state_manager/bottom_navigation_bar_controller.dart';
 import '../utils/app_color.dart';
 
@@ -19,7 +19,7 @@ class ProductCardWidget extends StatelessWidget {
       width: 130,
       child: InkWell(
         onTap: () {
-          Get.to(const ProductDetailsScreen());
+          Get.to(ProductDetailsScreen(productId: product.id!,));
           // Tried to show it from the
           // Get.find<BottomNavigationBarController>().changePageWhenTapped(4);
 

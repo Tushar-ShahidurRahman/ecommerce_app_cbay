@@ -17,7 +17,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
   @override
   void initState() {
     super.initState();
-    Get.find<ProductController>().getProductByCategory(widget.categoryId);
+    Get.find<ProductController>().getProductByCategoryId(widget.categoryId);
   }
 
   @override

@@ -1,4 +1,4 @@
-import 'productData.dart';
+import 'product_data.dart';
 
 class ProductByCategoryModel {
   String? msg;
