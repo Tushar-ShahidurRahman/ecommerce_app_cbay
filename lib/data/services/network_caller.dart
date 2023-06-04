@@ -19,6 +19,7 @@ class NetworkCaller {
         'Accept': 'application/json',
         'token': AuthController.token.toString(),
       });
+      log(AuthController.token ?? 'token is null in Auth controller');
       log(response.body);
       if (response.statusCode == 200) {
         return ResponseModel(

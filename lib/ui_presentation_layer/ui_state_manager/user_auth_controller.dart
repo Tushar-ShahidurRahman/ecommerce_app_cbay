@@ -17,7 +17,7 @@ class UserAuthController extends GetxController {
 
   Future<bool> emailVerification(String email) async {
     _emailVerificationInProgress = true;
-  update();
+    update();
     final emailResponseCt =
         await NetworkCaller.getRequest(url: Urls.userLoginUrl(email));
     _emailVerificationInProgress = false;
@@ -25,6 +25,7 @@ class UserAuthController extends GetxController {
       update();
       return true;
     } else {
+      update();
       return false;
     }
   }
@@ -37,7 +38,8 @@ class UserAuthController extends GetxController {
     _otpVerificationInProgress = false;
     if (otpResponseInCntlr.isSuccess) {
       log(otpResponseInCntlr.bodyData['data']);
-      await Get.find<AuthController>().saveToken(otpResponseInCntlr.bodyData['data']);
+      await Get.find<AuthController>()
+          .saveToken(otpResponseInCntlr.bodyData['data']);
       Get.find<UserProfileController>().getProfileData();
       update();
       return true;

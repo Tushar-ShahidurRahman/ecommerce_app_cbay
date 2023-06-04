@@ -23,7 +23,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GetBuilder<UserAuthController>(builder: (authController) {
+      body: GetBuilder<UserAuthController>(builder: (userAuthController) {
         return Padding(
           padding: const EdgeInsets.all(24.0),
           child: Form(
@@ -84,13 +84,13 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                 //     },
                 //   ),
                 // ),
-                authController.emailVerificationInProgress
+                userAuthController.emailVerificationInProgress
                     ? const CircularProgressIndicator()
                     : CommonElevatedButton(
                         title: 'Next',
                         onTap: () async {
                           if (_formKey.currentState!.validate()) {
-                            final bool emailResponseUI = await authController
+                            final bool emailResponseUI = await userAuthController
                                 .emailVerification(_emailETController.text);
                             if (emailResponseUI) {
                               Get.to(() => OTPVerificationScreen(email: _emailETController.text,));

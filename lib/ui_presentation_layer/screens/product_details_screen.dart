@@ -3,6 +3,7 @@ import 'package:ecommerce_app_cbay/ui_presentation_layer/custom_widgets/product_
 import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/review_screen.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/bottom_navigation_bar_controller.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/product_controller.dart';
+import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/wish_list_controller.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/utils/app_color.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/utils/styles.dart';
 import 'package:flutter/material.dart';
@@ -130,18 +131,30 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                           ),
                                         ),
                                         const SizedBox(width: 8),
-                                        Container(
-                                          height: 20,
-                                          width: 20,
-                                          decoration: BoxDecoration(
-                                              color: primaryColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(4)),
-                                          child: const Icon(
-                                            Icons.favorite_border,
-                                            size: 16,
-                                            color: Colors.white,
-                                          ),
+                                        GetBuilder<WishListController>(
+                                          builder: (wishListController) {
+                                            if(wishListController.wishListProductsInProgress) {
+                                              return const Center(child: CircularProgressIndicator());
+                                            }
+                                            return InkWell(
+                                              onTap: () {
+                                                Get.find<WishListController>().createWishList(productItemDetails.productId!);
+                                              },
+                                              child: Container(
+                                                height: 20,
+                                                width: 20,
+                                                decoration: BoxDecoration(
+                                                    color: primaryColor,
+                                                    borderRadius:
+                                                        BorderRadius.circular(4)),
+                                                child: const Icon(
+                                                  Icons.favorite_border,
+                                                  size: 16,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            );
+                                          }
                                         ),
                                       ],
                                     ),

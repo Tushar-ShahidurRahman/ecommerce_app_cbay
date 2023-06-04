@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:ecommerce_app_cbay/data/model/profile_model.dart';
+import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/email_verification_screen.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -9,6 +10,7 @@ class AuthController extends GetxController {
   static ProfileData? _profileData;
 
   static String? get token => _token;
+
   static ProfileData? get userProfile => _profileData;
 
   Future<bool> isLoggedIn() async {
@@ -47,8 +49,29 @@ class AuthController extends GetxController {
         jsonDecode(preference.getString('user_profile') ?? '{}'));
   }
 
-  Future<void> clearData() async {
+  Future<void> clearUserData() async {
     SharedPreferences preference = await SharedPreferences.getInstance();
     await preference.clear();
+    _token = null;
   }
+
+  Future<void> logOut() async {
+    await clearUserData();
+    Get.to(() => const EmailVerificationScreen());
+  }
+
+  Future<bool> checkAuthState() async {
+    final authState = await Get.find<AuthController>().isLoggedIn();
+    Get.to(() => const EmailVerificationScreen());
+    return authState;
+  }
+  // Alternative implementation of checkAuthState function. without the Get.find<AuthController>()
+  // Future<bool> checkAuthState() {
+  //   return isLoggedIn().then((authState) {
+  //     if (authState) {
+  //       Get.to(() => const EmailVerificationScreen());
+  //     }
+  //     return authState;
+  //   });
+  // }
 }

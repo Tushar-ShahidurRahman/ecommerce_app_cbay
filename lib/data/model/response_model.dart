@@ -7,6 +7,4 @@ class ResponseModel {
       {required this.statusCode,
       required this.isSuccess,
       required this.bodyData});
-
-
 }

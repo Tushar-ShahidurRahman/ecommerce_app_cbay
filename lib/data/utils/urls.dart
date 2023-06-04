@@ -18,6 +18,9 @@ class Urls {
   static String productDetailsByProductIdUrl(int productId) =>
       '$baseUrl/ProductDetailsById/$productId';
 
+  static String createWishListUrl(int productId) =>
+      '$baseUrl/CreateWishList/$productId';
+
   static String verifyOTPUrl(String email, String otp) =>
       '$baseUrl/VerifyLogin/$email/$otp';
 }
