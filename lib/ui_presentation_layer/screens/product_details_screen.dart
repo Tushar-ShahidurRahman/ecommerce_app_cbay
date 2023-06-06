@@ -1,9 +1,7 @@
-import 'package:ecommerce_app_cbay/ui_presentation_layer/custom_widgets/common_elevated_button.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/custom_widgets/product_related_widgets/product_carousel_widget.dart';
-import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/cart_screen.dart';
-import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/review_screen.dart';
+
 import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/auth_controller.dart';
-import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/bottom_navigation_bar_controller.dart';
+
 import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/cart_controller.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/product_controller.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/wish_list_controller.dart';
@@ -13,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../custom_widgets/bottom_info_container_widget.dart';
-import '../custom_widgets/product_stepper_widget.dart';
+import '../custom_widgets/stepper_widget.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   final int productId;
@@ -173,7 +171,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               ),
 
                               // This wrap is for the increment and decrement part
-                              const ProductStepperWidget(),
+                              const StepperWidget(),
                             ],
                           ),
                           const SizedBox(height: 8),
@@ -287,10 +285,17 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     await Get.find<AuthController>().checkAuthState();
                 if (result) {
                   if (_selectedColor != null && _selectedSize != null) {
-                    Get.find<CartController>().addProductToCart(
-                        productItemDetails.productId!,
-                        _selectedSize!,
-                        getHexCode(_selectedColor!));
+                    Get.find<CartController>()
+                        .addProductToCart(productItemDetails.productId!,
+                            _selectedSize!, getHexCode(_selectedColor!))
+                        .then((value) {
+                      if (value) {
+                        Get.showSnackbar(const GetSnackBar(
+                            title: 'Message',
+                            message: 'Product added to cart',
+                            duration: Duration(seconds: 3)));
+                      }
+                    });
                   } else {
                     // Get.snackbar('Message', 'Size and Color must be selected',
                     //     duration: const Duration(seconds: 3));
@@ -354,7 +359,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   }
 
   String getHexCode(Color color) {
-    final colorString = color.toString().replaceAll('0xff', '#').replaceAll('Color(', '').replaceAll(')', '');
+    final colorString = color
+        .toString()
+        .replaceAll('0xff', '#')
+        .replaceAll('Color(', '')
+        .replaceAll(')', '');
     return colorString;
   }
 }

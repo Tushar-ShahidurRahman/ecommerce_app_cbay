@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class ProductStepperWidget extends StatefulWidget {
-  const ProductStepperWidget({Key? key}) : super(key: key);
+class StepperWidget extends StatefulWidget {
+  const StepperWidget({Key? key}) : super(key: key);
 
   @override
-  State<ProductStepperWidget> createState() => _ProductStepperWidgetState();
+  State<StepperWidget> createState() => _StepperWidgetState();
 }
 
-class _ProductStepperWidgetState extends State<ProductStepperWidget> {
+class _StepperWidgetState extends State<StepperWidget> {
   int _currentValue = 1;
   final TextEditingController _stepperTEController =
   TextEditingController(text: '1');
