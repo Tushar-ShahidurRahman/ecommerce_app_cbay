@@ -1,4 +1,6 @@
+import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/cart_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 
 import '../utils/app_color.dart';
 import '../utils/styles.dart';
@@ -56,7 +58,14 @@ class BottomInfoContainerWidget extends StatelessWidget {
             SizedBox(
                 width: 140,
                 child:
-                CommonElevatedButton(title: buttonTitleText, onTap: onTap))
+                GetBuilder<CartController>(
+                  builder: (cartController) {
+                    if(cartController.addToCartInProgress) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    return CommonElevatedButton(title: buttonTitleText, onTap: onTap);
+                  }
+                ))
           ],
         ),
       ),

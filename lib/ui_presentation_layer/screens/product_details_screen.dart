@@ -1,7 +1,10 @@
 import 'package:ecommerce_app_cbay/ui_presentation_layer/custom_widgets/common_elevated_button.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/custom_widgets/product_related_widgets/product_carousel_widget.dart';
+import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/cart_screen.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/review_screen.dart';
+import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/auth_controller.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/bottom_navigation_bar_controller.dart';
+import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/cart_controller.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/product_controller.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/wish_list_controller.dart';
 import 'package:ecommerce_app_cbay/ui_presentation_layer/utils/app_color.dart';
@@ -33,8 +36,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   void initState() {
     super.initState();
-    Get.find<ProductController>()
-        .getProductDetailsByProductId(widget.productId);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<ProductController>()
+          .getProductDetailsByProductId(widget.productId);
+    });
   }
 
   @override
@@ -132,30 +137,35 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                         ),
                                         const SizedBox(width: 8),
                                         GetBuilder<WishListController>(
-                                          builder: (wishListController) {
-                                            if(wishListController.wishListProductsInProgress) {
-                                              return const Center(child: CircularProgressIndicator());
-                                            }
-                                            return InkWell(
-                                              onTap: () {
-                                                Get.find<WishListController>().createWishList(productItemDetails.productId!);
-                                              },
-                                              child: Container(
-                                                height: 20,
-                                                width: 20,
-                                                decoration: BoxDecoration(
-                                                    color: primaryColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(4)),
-                                                child: const Icon(
-                                                  Icons.favorite_border,
-                                                  size: 16,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            );
+                                            builder: (wishListController) {
+                                          if (wishListController
+                                              .wishListProductsInProgress) {
+                                            return const Center(
+                                                child:
+                                                    CircularProgressIndicator());
                                           }
-                                        ),
+                                          return InkWell(
+                                            onTap: () {
+                                              Get.find<WishListController>()
+                                                  .createWishList(
+                                                      productItemDetails
+                                                          .productId!);
+                                            },
+                                            child: Container(
+                                              height: 20,
+                                              width: 20,
+                                              decoration: BoxDecoration(
+                                                  color: primaryColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(4)),
+                                              child: const Icon(
+                                                Icons.favorite_border,
+                                                size: 16,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          );
+                                        }),
                                       ],
                                     ),
                                   ],
@@ -267,11 +277,31 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 ),
               ),
             ),
+
             BottomInfoContainerWidget(
               text: 'Price',
               priceNumber: '\$${productItemDetails.product?.price ?? 0}',
               buttonTitleText: 'Add to cart',
-              onTap: () {},
+              onTap: () async {
+                final result =
+                    await Get.find<AuthController>().checkAuthState();
+                if (result) {
+                  if (_selectedColor != null && _selectedSize != null) {
+                    Get.find<CartController>().addProductToCart(
+                        productItemDetails.productId!,
+                        _selectedSize!,
+                        getHexCode(_selectedColor!));
+                  } else {
+                    // Get.snackbar('Message', 'Size and Color must be selected',
+                    //     duration: const Duration(seconds: 3));
+                    Get.showSnackbar(const GetSnackBar(
+                        title: 'Message',
+                        message: 'Size and Color must be selected',
+                        duration: Duration(seconds: 3)));
+                  }
+                }
+              },
+              // );
             ),
           ],
         );
@@ -321,5 +351,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       flutterColor.add(Color(int.parse(color)));
     }
     return flutterColor;
+  }
+
+  String getHexCode(Color color) {
+    final colorString = color.toString().replaceAll('0xff', '#').replaceAll('Color(', '').replaceAll(')', '');
+    return colorString;
   }
 }

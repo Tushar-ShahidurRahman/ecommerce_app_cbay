@@ -62,16 +62,18 @@ class AuthController extends GetxController {
 
   Future<bool> checkAuthState() async {
     final authState = await Get.find<AuthController>().isLoggedIn();
-    Get.to(() => const EmailVerificationScreen());
+    if (authState == false) {
+      Get.to(() => const EmailVerificationScreen());
+    }
     return authState;
   }
-  // Alternative implementation of checkAuthState function. without the Get.find<AuthController>()
-  // Future<bool> checkAuthState() {
-  //   return isLoggedIn().then((authState) {
-  //     if (authState) {
-  //       Get.to(() => const EmailVerificationScreen());
-  //     }
-  //     return authState;
-  //   });
-  // }
+// Alternative implementation of checkAuthState function. without the Get.find<AuthController>()
+// Future<bool> checkAuthState() {
+//   return isLoggedIn().then((authState) {
+//     if (authState == false) {
+//       Get.to(() => const EmailVerificationScreen());
+//     }
+//     return authState;
+//   });
+// }
 }

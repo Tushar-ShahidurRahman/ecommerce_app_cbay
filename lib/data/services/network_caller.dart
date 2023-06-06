@@ -12,13 +12,47 @@ class NetworkCaller {
   //Singleton architecture.
   NetworkCaller._();
 
+  //get method
   static Future<ResponseModel> getRequest({required String url}) async {
     try {
       final Response response = await get(Uri.parse(url), headers: {
-        'Content-type' : 'application/json',
+        'Content-type': 'application/json',
         'Accept': 'application/json',
         'token': AuthController.token.toString(),
       });
+      log(AuthController.token ?? 'token is null in Auth controller');
+      log(response.body);
+      if (response.statusCode == 200) {
+        return ResponseModel(
+          statusCode: response.statusCode,
+          isSuccess: true,
+          bodyData: jsonDecode(response.body),
+        );
+      } else {
+        return ResponseModel(
+          statusCode: response.statusCode,
+          isSuccess: false,
+          bodyData: jsonDecode(response.body),
+        );
+      }
+    } catch (e) {
+      log(e.toString());
+      return ResponseModel(
+          statusCode: -1, isSuccess: false, bodyData: e.toString());
+    }
+  }
+
+  //post method
+  static Future<ResponseModel> postRequest(
+      {required String url, required Map<String, dynamic>? body}) async {
+    try {
+      final Response response = await post(Uri.parse(url),
+          headers: {
+            'Content-type': 'application/json',
+            'Accept': 'application/json',
+            'token': AuthController.token.toString(),
+          },
+          body: jsonEncode(body));
       log(AuthController.token ?? 'token is null in Auth controller');
       log(response.body);
       if (response.statusCode == 200) {

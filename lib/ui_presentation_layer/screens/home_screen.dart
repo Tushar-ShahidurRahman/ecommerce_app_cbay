@@ -108,8 +108,8 @@ class HomeScreen extends StatelessWidget {
                   builder: (productByRemarkController) {
                 return Visibility(
                   visible: productByRemarkController
-                          .getPopularProductByRemarkInProgress ||
-                      productByRemarkController.popularProduct == null,
+                          .getPopularProductByRemarkInProgress,
+                    // || productByRemarkController.popularProduct == null,
                   child: const Center(child: CircularProgressIndicator()),
                   replacement:
     GetBuilder<ProductByRemarkController>(
@@ -137,8 +137,8 @@ class HomeScreen extends StatelessWidget {
                   builder: (productByRemarkController) {
                 return Visibility(
                   visible: productByRemarkController
-                          .getSpecialProductByRemarkInProgress ||
-                      productByRemarkController.specialProduct == null,
+                          .getSpecialProductByRemarkInProgress ,
+                      // || productByRemarkController.specialProduct == null,
                   replacement: GetBuilder<ProductByRemarkController>(
                       builder: (productByRemarkController){
                       return SingleChildScrollView(
@@ -166,8 +166,8 @@ class HomeScreen extends StatelessWidget {
                 builder: (productByRemarkController) {
                   return Visibility(
                     visible: productByRemarkController
-                            .getNewProductByRemarkInProgress &&
-                        productByRemarkController.newProduct == null,
+                            .getNewProductByRemarkInProgress,
+                        // && productByRemarkController.newProduct == null,
                     child: const Center(child: CircularProgressIndicator()),
                     replacement: GetBuilder<ProductByRemarkController>(
                         builder: (productByRemarkController) {
