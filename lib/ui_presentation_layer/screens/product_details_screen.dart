@@ -1,4 +1,5 @@
 import 'package:ecommerce_app_cbay/ui_presentation_layer/custom_widgets/product_related_widgets/product_carousel_widget.dart';
+import 'package:ecommerce_app_cbay/ui_presentation_layer/screens/review_screen.dart';
 
 import 'package:ecommerce_app_cbay/ui_presentation_layer/ui_state_manager/auth_controller.dart';
 
@@ -121,6 +122,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                         TextButton(
                                           onPressed: () {
                                             // Get.find<BottomNavigationBarController>().changePageWhenTapped(5);
+                                            Get.to(() => ReviewScreen());
                                           },
                                           child: const Text(
                                             'Reviews',
@@ -293,6 +295,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         Get.showSnackbar(const GetSnackBar(
                             title: 'Message',
                             message: 'Product added to cart',
+                            duration: Duration(seconds: 3)));
+                      } else{
+                        Get.showSnackbar(const GetSnackBar(
+                            title: 'Error Message',
+                            message: 'There is a problem.',
                             duration: Duration(seconds: 3)));
                       }
                     });
